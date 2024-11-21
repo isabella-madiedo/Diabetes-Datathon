@@ -1,0 +1,123 @@
+--1.0-General Check
+select *
+from ACCENTURE.PUBLIC.CLEANED_DATA
+limit 10
+
+--COMMENT: Cholestorol level is not recorded, missing from dataset.
+
+--Create a unique patient ID, Ensures that each patient has a single record in the patients table.
+--Helps in deduplication, especially when merging datasets or updating records.
+
+--2.1-See if Unique patient ID exists-- It doesn't so adding it on.
+ALTER TABLE ACCENTURE.PUBLIC.CLEANED_DATA ADD COLUMN patient_id INTEGER;
+ALTER TABLE ACCENTURE.PUBLIC.CLEANED_DATA
+MODIFY COLUMN patient_id INTEGER;
+
+--2.2 Create a Sequence ---
+CREATE SEQUENCE patient_id_seq START = 1 INCREMENT = 1;
+
+--2.3 Update the Patient ID Column--
+UPDATE ACCENTURE.PUBLIC.CLEANED_DATA
+SET patient_id = patient_id_seq.nextval;
+
+--2.4 Verifying Results --
+SELECT patient_id, COUNT(*)
+FROM ACCENTURE.PUBLIC.CLEANED_DATA
+GROUP BY patient_id
+HAVING COUNT(*) > 1;
+
+--2.5-View Table to Check Unique Patient ID added--
+select *
+from ACCENTURE.PUBLIC.CLEANED_DATA
+limit 300
+
+--3.0 Designing the Schema --
+-- 3.1 Make Patient Table primary key, stores demographic data for each patient, identified by patient_id --
+CREATE TABLE PATIENT (
+    patient_id INT PRIMARY KEY,
+    age INT,
+    gender STRING,
+    bmi FLOAT
+);
+
+-- 3.2 Health Metrics Table, contains medical metrics related to diabetes risk
+CREATE TABLE HEALTH_METRICS (
+    patient_id INT,
+    hypertension INT,
+    cholesterol_level FLOAT,
+    diabetes_pedigree_function FLOAT,
+    FOREIGN KEY (patient_id) REFERENCES PATIENT(patient_id)
+);
+
+-- 3.3 Lifestyle Table, captures lifestyle and behavioral information
+CREATE TABLE LIFESTYLE (
+    patient_id INT,
+    diet_type STRING,
+    physical_activity_level STRING,
+    social_media_usage STRING,
+    sleep_duration FLOAT,
+    stress_level STRING,
+    alcohol_consumption STRING,
+    FOREIGN KEY (patient_id) REFERENCES PATIENT(patient_id)
+);
+
+-- 3.4 General Check
+select *
+from ACCENTURE.PUBLIC.CLEANED_DATA
+limit 10
+
+--4.0 Populating the normalized tables using data from the CSV
+--4.1 - Populate the Patient Table
+INSERT INTO PATIENT (patient_id, age, gender, bmi)
+SELECT patient_id, age, gender, bmi
+FROM ACCENTURE.PUBLIC.CLEANED_DATA;
+
+-- 4.2 - Populate the Health Metrics Table
+INSERT INTO HEALTH_METRICS (patient_id, hypertension, diabetes_pedigree_function)
+SELECT patient_id, hypertension, diabetes_pedigree_function
+FROM ACCENTURE.PUBLIC.CLEANED_DATA;
+
+-- 4.3 - Populate the Lifestyle Table
+INSERT INTO LIFESTYLE (patient_id, diet_type, physical_activity_level, sleep_duration, stress_level, alcohol_consumption)
+SELECT patient_id, diet_type, physical_activity_level, sleep_duration, stress_level, alcohol_consumption
+FROM ACCENTURE.PUBLIC.CLEANED_DATA;
+
+-- 5.0 Verifying the Data --
+-- 5.1 - Verify the Number of Patients:
+SELECT COUNT(*) AS num_patients FROM PATIENT;
+
+--5.2 - Ensure All Patients Have Metrics
+SELECT COUNT(DISTINCT patient_id) AS patients_in_health_metrics
+FROM HEALTH_METRICS;
+
+--5.3 - Cross-Check Patient Information Across Tables 
+SELECT p.patient_id, p.age, l.diet_type, 
+FROM PATIENT p
+LEFT JOIN LIFESTYLE l ON p.patient_id = l.patient_id
+LEFT JOIN HEALTH_METRICS h ON p.patient_id = h.patient_id
+WHERE p.patient_id = 1; -- Replace with any patient_id to verify
+
+-- Noticed Last Patien_ID = 63240, but Row Number is 62952
+--6.0 - Investigating the Discrepancy
+--6.1 - Finding  the Max and Min of Patient_ID
+SELECT MIN(patient_id) AS min_patient_id, MAX(patient_id) AS max_patient_id
+FROM ACCENTURE.PUBLIC.CLEANED_DATA; -- Number 1 to 63240
+
+--6.2 - Counting the Number of Rows
+SELECT COUNT(*) AS total_rows
+FROM ACCENTURE.PUBLIC.CLEANED_DATA; -- Total Rows 62952
+
+--6.3 - Check for Missing patient_id Values
+SELECT patient_id
+FROM ACCENTURE.PUBLIC.CLEANED_DATA
+ORDER BY patient_id;  -- noticed jump from 256 to 301 in patient_id indicates there are gaps in patient_id sequence
+
+-- 6.4 - Reset the patient_id to remove gaps THIS CODE IS NOT WORKING DUE TO UPDATE CHECK LATER !!!
+WITH numbered_data AS (
+    SELECT patient_id, ROW_NUMBER() OVER (ORDER BY patient_id) AS new_patient_id
+    FROM ACCENTURE.PUBLIC.CLEANED_DATA
+)
+UPDATE ACCENTURE.PUBLIC.CLEANED_DATA
+SET patient_id = numbered_data.new_patient_id
+FROM numbered_data
+WHERE ACCENTURE.PUBLIC.CLEANED_DATA.patient_id = numbered_data.patient_id;
