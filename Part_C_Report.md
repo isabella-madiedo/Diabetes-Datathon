@@ -179,3 +179,6 @@ In conclusion, we successfully designed and populated a normalized database sche
 3. It populates the normalized tables with data from the original dataset.
 4. It validates data integrity with appropriate queries.
 5. It investigates discrepancies and provides an explanation for gaps in `patient_id`
+
+## 8. Appendix - Schema Design
+<img title="a title" alt="Alt text" src="/Team_Notes/schema_design.png">
