@@ -37,14 +37,14 @@ CREATE TABLE PATIENT (
     patient_id INT PRIMARY KEY,
     age INT,
     gender STRING,
-    bmi FLOAT
+    bmi FLOAT,
+    diabetes INT
 );
 
 -- 3.2 Health Metrics Table, contains medical metrics related to diabetes risk
 CREATE TABLE HEALTH_METRICS (
     patient_id INT,
     hypertension INT,
-    cholesterol_level FLOAT,
     diabetes_pedigree_function FLOAT,
     FOREIGN KEY (patient_id) REFERENCES PATIENT(patient_id)
 );
@@ -54,7 +54,6 @@ CREATE TABLE LIFESTYLE (
     patient_id INT,
     diet_type STRING,
     physical_activity_level STRING,
-    social_media_usage STRING,
     sleep_duration FLOAT,
     stress_level STRING,
     alcohol_consumption STRING,
@@ -68,8 +67,8 @@ limit 10
 
 --4.0 Populating the normalized tables using data from the CSV
 --4.1 - Populate the Patient Table
-INSERT INTO PATIENT (patient_id, age, gender, bmi)
-SELECT patient_id, age, gender, bmi
+INSERT INTO PATIENT (patient_id, age, gender, bmi, diabetes)
+SELECT patient_id, age, gender, bmi, diabetes
 FROM ACCENTURE.PUBLIC.CLEANED_DATA;
 
 -- 4.2 - Populate the Health Metrics Table
@@ -120,4 +119,4 @@ WITH numbered_data AS (
 UPDATE ACCENTURE.PUBLIC.CLEANED_DATA
 SET patient_id = numbered_data.new_patient_id
 FROM numbered_data
-WHERE ACCENTURE.PUBLIC.CLEANED_DATA.patient_id = numbered_data.patient_id;
+WHERE ACCENTURE.PUBLIC.CLEANED_DATA.patient_id = numbered_data.patient_id;ACCENTURE.PUBLIC.PATIENT
