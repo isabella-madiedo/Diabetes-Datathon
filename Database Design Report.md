@@ -1,4 +1,4 @@
-# Part C - Report: Database Normalization and Schema Design
+# Database Normalization and Schema Design
 
 ## 1. Introduction
 
