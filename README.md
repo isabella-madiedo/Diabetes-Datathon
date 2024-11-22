@@ -1,6 +1,8 @@
-# Studying the Impact of Diabetes on the Human Body
-&#x1F3E5;
----
+# Studying the Impact of Diabetes on the Human Body &#x1F3E5;
+### Datathon: Team 5
+
+#### Contents
+
 1. A detailed report outlining the data cleaning and preprocessing steps take, with justifications for each decision.
 2. An initial EDA (Exploratory Data Analysis) report that includes key insights and visualizations (e.g., histograms, scatter plots, heatmaps) generated using Python libraries like Matplotlib or Seaborn.
 3. A clean, well-prepared dataset stored as a new CSV file or as DataFrame (Pandas, Pyspark)
