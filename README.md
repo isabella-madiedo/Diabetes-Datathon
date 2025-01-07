@@ -1,10 +1,24 @@
-# Studying the Impact of Diabetes on the Human Body &#x1F3E5;
-### Datathon: Team 5
+# Datathon: Studying the Impact of Diabetes on the Human Body &#x1F3E5;
 
-#### Contents
+### :bulb: Description
+This project presents an end-to-end solution to the 2024 Diabetes Datathon. The solution covers data cleaning and preprocessing, as well as Exploratory Data Analysis and advanced statistical analyses. The solution aims to provide a refined and insightful dataset which can be leveraged for robust medical analysis and study.
 
-1. A detailed report outlining the data cleaning and preprocessing steps take, with justifications for each decision.
-2. An initial EDA (Exploratory Data Analysis) report that includes key insights and visualizations (e.g., histograms, scatter plots, heatmaps) generated using Python libraries like Matplotlib or Seaborn.
-3. A clean, well-prepared dataset stored as a new CSV file or as DataFrame (Pandas, Pyspark)
-4. A brief report explaining schema design with implemented SQLs.
-5. [Monday Nov. 25] A visualisation report that translates the data analysis into actionable insights for stakeholders.
+### :briefcase: Datathon Brief
+Diabetes is a complex, chronic endocrine disorder, affecting millions of British people per year. November is Diabetes Awareness month, and your client - a drug manufacturer, has just secured funding to break ground in a new product segment for Diabetes. In preparation to launch the novel product, and in honour of Diabetes awareness month, they want you to analyse the impact of the disease on the human body.
+
+They have hired you, a team of Data Analysts, to spend the 2 weeks of the Datathon performing data analysis and visualisation, to inform their approach.
+
+### :white_check_mark: Contents
+1. Data cleaning and preprocessing
+   i.   Data Inspection
+   ii.  Handling Outliers
+   iii. Handling Missing Values
+   iv.  Univariate Analysis
+
+2. Exploratory Data Analysis
+   i.   Bivariate analysis
+   ii.  Multivariate analysis
+   iii. Hypothesis Testing
+   
+4. Exploratory Data Analysis
+5. 
