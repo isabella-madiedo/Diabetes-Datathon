@@ -9,13 +9,14 @@ Diabetes is a complex, chronic endocrine disorder, affecting millions of British
 They have hired you, a team of Data Analysts, to spend the 2 weeks of the Datathon performing data analysis and visualisation, to inform their approach.
 
 ### :white_check_mark: Contents
-1. Data cleaning and preprocessing
-   i.   Data Inspection
-   ii.  Handling Outliers
-   iii. Handling Missing Values
-   iv.  Univariate Analysis
 
-2. Exploratory Data Analysis
-   i.   Bivariate analysis
-   ii.  Multivariate analysis
-   iii. Hypothesis Testing
+1. Data Cleaning and Preprocessing
+   1. Data Inspection
+   2. Handling Outliers
+   3. Handlign Missing Values
+   4. Univariate Analysis
+   
+3. Exploratory Data Analysis
+   1. Bivariate Analysis
+   2. Multivariate Analysis
+   3. Hypothesis Testing
