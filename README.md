@@ -19,6 +19,3 @@ They have hired you, a team of Data Analysts, to spend the 2 weeks of the Datath
    i.   Bivariate analysis
    ii.  Multivariate analysis
    iii. Hypothesis Testing
-   
-4. Exploratory Data Analysis
-5. 
