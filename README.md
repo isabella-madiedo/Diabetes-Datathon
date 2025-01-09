@@ -20,3 +20,11 @@ They have hired you, a team of Data Analysts, to spend the 2 weeks of the Datath
    1. Bivariate Analysis
    2. Multivariate Analysis
    3. Hypothesis Testing
+  
+### :woman_technologist: Tools Used
+Python
+- Jupyter Notebook
+- Pandas
+- Seaborn
+- Matplotlib
+- Sklearn
