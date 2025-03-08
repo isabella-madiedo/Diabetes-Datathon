@@ -1,4 +1,4 @@
-# Datathon: Studying the Impact of Diabetes on the Human Body &#x1F3E5;
+# Datathon: Studying of Diabetes in the Human Body &#x1F3E5;
 
 ### :bulb: Description
 This project presents an end-to-end solution to the 2024 Diabetes Datathon. The solution covers data cleaning and preprocessing, as well as Exploratory Data Analysis and advanced statistical analyses. The solution aims to provide a refined and insightful dataset which can be leveraged for robust medical analysis and study.
