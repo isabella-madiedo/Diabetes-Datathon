@@ -21,6 +21,10 @@ They have hired you, a team of Data Analysts, to spend the 2 weeks of the Datath
    2. Multivariate Analysis
    3. Hypothesis Testing
   
+3. PowerBI Dashboard
+   1. Key data insights
+   2. Key insight visualisation
+  
 ### :woman_technologist: Tools Used
 Python
 - Jupyter Notebook
